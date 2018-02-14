@@ -53,11 +53,14 @@ public class scraGhosts implements Screen, InputProcessor {
         nGhostdX = horizontal(nDirNew, nGhostdX);
         nGhostX += nGhostdX;
         nGhostY += nGhostdY;
+//        bHit
+//        if(bHit == true) {
+//        
+//        }
         batch.begin();
         batch.draw(txGhost, nGhostX, nGhostY, 30, 30);
         batch.end();
-        
-
+       
     }
 
     public static int direction(int nNum1, int nNum2) {
@@ -69,27 +72,29 @@ public class scraGhosts implements Screen, InputProcessor {
 
     public static int vertical(int nNum1, int nNum2) {
         if (nNum1 == 1) {
-            nNum2 = 2;
+            nNum2 = 1;
         } else if (nNum1 == 3) {
-            nNum2 = -2;
+            nNum2 = -1;
         } else {
             nNum2 = 0;
         }
         return nNum2;
-
     }
     public static int horizontal(int nNum1, int nNum2) {
         if (nNum1 == 2) {
-            nNum2 = 2;
+            nNum2 = 1;
         } else if (nNum1 == 4) {
-            nNum2 = -2;
+            nNum2 = -1;
         } else {
             nNum2 = 0;
         }
         return nNum2;
-
     }
 
+//    public static boolean isHit() {
+//        
+//    }
+    
     @Override
     public void resize(int i, int i1) {
     }
