@@ -5,6 +5,7 @@
 package com.gdx.scratches;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -20,57 +21,63 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class ScrSwitch1 implements Screen, InputProcessor {
     Texture tx;
     SpriteBatch batch;
+    Hamsters hamsters;
     Sprite spr;
-    
-    public ScrSwitch1(Hamsters aThis) {
+    boolean bKey;
+
+    public ScrSwitch1(Hamsters _hamsters) {
+        hamsters = _hamsters;
         batch = new SpriteBatch();
         tx = new Texture("One.png");
         spr = new Sprite(tx);
-    }
-    
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        batch.draw(spr, 400 , 400);
-        batch.end();
+        bKey = false;
+        System.out.println("Class Created.");
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void show() {
-        
+    }
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            System.out.println("a");
+            hamsters.updateState(1);
+        }
+        batch.begin();
+        batch.draw(spr, 0, 0);
+        batch.end();
+
     }
 
     @Override
     public void resize(int i, int i1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void pause() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void resume() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void hide() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void dispose() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public boolean keyDown(int i) {
+        System.out.println("KeyDown.");
+        
         return false;
-       
     }
 
     @Override

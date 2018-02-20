@@ -25,7 +25,7 @@ public class Hamsters extends Game {
 
     @Override
     public void create() {
-        nScreen = 2;
+        nScreen = 0;
         ScrSwitch1 = new ScrSwitch1(this);
         ScrSwitch2 = new ScrSwitch2(this);
         scraGhosts = new ScrGhosts(this);

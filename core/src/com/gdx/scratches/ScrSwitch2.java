@@ -17,7 +17,7 @@ import com.gdx.hamsters.Hamsters;
  * @author forrd6685
  */
 public class ScrSwitch2 implements Screen {
-    Texture tx;
+   Texture tx;
     SpriteBatch batch;
     Sprite spr;
     
@@ -25,6 +25,7 @@ public class ScrSwitch2 implements Screen {
         batch = new SpriteBatch();
         tx = new Texture("two.png");
         spr = new Sprite(tx);
+        // ftdt
     }
     
     public void render(float delta) {
@@ -33,35 +34,36 @@ public class ScrSwitch2 implements Screen {
         batch.begin();
         batch.draw(spr, 400 , 400);
         batch.end();
+        System.out.println("2");
     }
 
     @Override
     public void show() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void resize(int i, int i1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     @Override
     public void pause() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     @Override
     public void resume() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     @Override
     public void hide() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     @Override
     public void dispose() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 }
