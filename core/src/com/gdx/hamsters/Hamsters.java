@@ -3,11 +3,11 @@ package com.gdx.hamsters;
 import com.badlogic.gdx.Game;
 import com.gdx.scratches.ScrSwitch1;
 import com.gdx.scratches.ScrSwitch2;
-import com.gdx.scratches.scraGhosts;
+import com.gdx.scratches.ScrGhosts;
 
 public class Hamsters extends Game {
 
-    scraGhosts scraGhosts;
+    ScrGhosts scraGhosts;
     ScrSwitch1 ScrSwitch1;
     ScrSwitch2 ScrSwitch2;
     int nScreen;
@@ -28,7 +28,7 @@ public class Hamsters extends Game {
         nScreen = 2;
         ScrSwitch1 = new ScrSwitch1(this);
         ScrSwitch2 = new ScrSwitch2(this);
-        scraGhosts = new scraGhosts(this);
+        scraGhosts = new ScrGhosts(this);
         updateState(nScreen);
         
     }
