@@ -76,14 +76,14 @@ public class ScrGhosts implements Screen, InputProcessor {
             sprGhost.setY(sprGhost.getY() - nGhostdY);
             bGhostChangeDir = true;
         }
-        bHamsterOutOfBounds = isOutOfBounds(sprHamster);      
+        bHamsterOutOfBounds = isOutOfBounds(sprHamster);
         if (bHamsterOutOfBounds == true) {
             sprHamster.setX(sprHamster.getX() - nHamdX);
             sprHamster.setY(sprHamster.getY() - nHamdY);
         }
         batch.begin();
         //batch.draw(Ghost, Ghost.getX(), Ghost.getY());
-        sprGhost.draw(batch);
+        sprGhost.draw(batch);       
         sprHamster.draw(batch);
         batch.end();
     }
@@ -116,7 +116,7 @@ public class ScrGhosts implements Screen, InputProcessor {
         }
         return nNum2;
     }
-    
+
     public boolean isHit(Sprite spr1, Sprite spr2) {
         return spr1.getBoundingRectangle().overlaps(spr2.getBoundingRectangle());
     }
