@@ -68,7 +68,7 @@ public class ScrGhosts implements Screen, InputProcessor {
         sprHamster.setY(sprHamster.getY() + nHamdY);
         bIsHit = isHit(sprGhost, sprHamster);
         if (bIsHit == true) {
-            game.updateState(1);
+            game.updateState(3);
         }
         bGhostOutOfBounds = isOutOfBounds(sprGhost);
         if (bGhostOutOfBounds == true) {
