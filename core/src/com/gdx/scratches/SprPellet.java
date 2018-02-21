@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 public class SprPellet extends Sprite {
      public SprPellet(int nX, int nY) {
-        super(new Texture(Gdx.files.internal("pellet.svg")));
+        super(new Texture(Gdx.files.internal("dot.png")));
         setPosition(nX, nY);
         setSize(10, 10);        
     }

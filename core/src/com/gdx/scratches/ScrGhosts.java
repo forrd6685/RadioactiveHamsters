@@ -18,12 +18,14 @@ public class ScrGhosts implements Screen, InputProcessor {
     OrthographicCamera ocCam;
     SprGhost sprGhost;
     SprHamster sprHamster;
+    SprPellet sprPellet;
     Hamsters game;
 
     public ScrGhosts(Hamsters aThis) {
         batch = new SpriteBatch();
         sprGhost = new SprGhost(275, 200, 30, 30);
         sprHamster = new SprHamster(100, 100, 30, 30);
+        sprPellet = new SprPellet(200, 200);
         nGhostdX = 0;
         nGhostdY = 0;
         bGhostChangeDir = false;
@@ -81,10 +83,12 @@ public class ScrGhosts implements Screen, InputProcessor {
             sprHamster.setX(sprHamster.getX() - nHamdX);
             sprHamster.setY(sprHamster.getY() - nHamdY);
         }
+        
         batch.begin();
         //batch.draw(Ghost, Ghost.getX(), Ghost.getY());
         sprGhost.draw(batch);
         sprHamster.draw(batch);
+        sprPellet.draw(batch);
         batch.end();
     }
 
