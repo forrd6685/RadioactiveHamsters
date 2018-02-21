@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class ScrGhosts implements Screen, InputProcessor {
-
+//hur dud ere
     SpriteBatch batch;
     int nGhostX, nGhostY, nGhostDirOld, nGhostDirNew, nGhostdX, nGhostdY, nHamDir, nHamVorH, nHamdX, nHamdY, nRanGhostMove;
     boolean bGhostChangeDir, bGhostOutOfBounds, bHamsterOutOfBounds, bGhostRanMove, bIsHit;
