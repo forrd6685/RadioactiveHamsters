@@ -8,7 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.gdx.hamsters.Hamsters;
+import com.gdx.hamsters.GamHamsters;
 
 /**
  *
@@ -19,7 +19,7 @@ public class ScrGameOver implements Screen {
     SpriteBatch batch;
     Texture tExp;
 
-    public ScrGameOver(Hamsters aThis) {
+    public ScrGameOver(GamHamsters aThis) {
         batch = new SpriteBatch();
         tExp = new Texture("explosion.jpg");
 

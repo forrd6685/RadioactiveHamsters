@@ -4,11 +4,11 @@ import com.badlogic.gdx.Game;
 import com.gdx.scratches.ScrGameOver;
 import com.gdx.scratches.ScrSwitch1;
 import com.gdx.scratches.ScrSwitch2;
-import com.gdx.scratches.ScrGhosts;
+import com.gdx.scratches.ScrMain;
 
-public class Hamsters extends Game {
+public class GamHamsters extends Game {
 
-    ScrGhosts scraGhosts;
+    ScrMain scraGhosts;
     ScrSwitch1 ScrSwitch1;
     ScrSwitch2 ScrSwitch2;
     ScrGameOver ScrGameOver;
@@ -32,7 +32,7 @@ public class Hamsters extends Game {
         nScreen = 2;
         ScrSwitch1 = new ScrSwitch1(this);
         ScrSwitch2 = new ScrSwitch2(this);
-        scraGhosts = new ScrGhosts(this);
+        scraGhosts = new ScrMain(this);
         ScrGameOver = new ScrGameOver(this);
         updateState(nScreen);
         

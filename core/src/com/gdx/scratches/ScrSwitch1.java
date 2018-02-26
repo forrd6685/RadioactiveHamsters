@@ -9,7 +9,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.gdx.hamsters.Hamsters;
+import com.gdx.hamsters.GamHamsters;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,11 +21,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class ScrSwitch1 implements Screen, InputProcessor {
     Texture tx;
     SpriteBatch batch;
-    Hamsters hamsters;
+    GamHamsters hamsters;
     Sprite spr;
     boolean bKey;
 
-    public ScrSwitch1(Hamsters _hamsters) {
+    public ScrSwitch1(GamHamsters _hamsters) {
         hamsters = _hamsters;
         batch = new SpriteBatch();
         tx = new Texture("One.png");

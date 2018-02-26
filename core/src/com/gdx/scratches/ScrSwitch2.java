@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.gdx.hamsters.Hamsters;
+import com.gdx.hamsters.GamHamsters;
 
 /**
  *
@@ -21,7 +21,7 @@ public class ScrSwitch2 implements Screen {
     SpriteBatch batch;
     Sprite spr;
     
-    public ScrSwitch2(Hamsters aThis) {
+    public ScrSwitch2(GamHamsters aThis) {
         batch = new SpriteBatch();
         tx = new Texture("two.png");
         spr = new Sprite(tx);

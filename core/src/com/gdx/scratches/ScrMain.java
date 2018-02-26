@@ -2,7 +2,7 @@ package com.gdx.scratches;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.gdx.hamsters.Hamsters;
+import com.gdx.hamsters.GamHamsters;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
@@ -10,28 +10,28 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class ScrGhosts implements Screen, InputProcessor {
-//hur dud ere
+public class ScrMain implements Screen, InputProcessor {
+
     SpriteBatch batch;
     int nGhostX, nGhostY, nGhostDirOld, nGhostDirNew, nGhostdX, nGhostdY, nHamDir, nHamVorH, nHamdX, nHamdY, nRanGhostMove;
-    boolean bGhostChangeDir, bGhostOutOfBounds, bHamsterOutOfBounds, bGhostRanMove, bIsHit;
+    boolean bMovement, bGhostOOB, bHamsterOOB, bGhostRanMove, bIsHit;
     OrthographicCamera ocCam;
     SprGhost sprGhost;
     SprHamster sprHamster;
     SprPellet sprPellet;
-    Hamsters game;
+    GamHamsters gamHamsters;
 
-    public ScrGhosts(Hamsters aThis) {
+    public ScrMain(GamHamsters _gamhamsters) {
         batch = new SpriteBatch();
         sprGhost = new SprGhost(275, 200, 30, 30);
         sprHamster = new SprHamster(100, 100, 30, 30);
         sprPellet = new SprPellet(200, 200);
         nGhostdX = 0;
         nGhostdY = 0;
-        bGhostChangeDir = false;
+        bMovement = false;
         Gdx.input.setInputProcessor(this);
         ocCam = new OrthographicCamera();
-        game = aThis;
+        gamHamsters = _gamhamsters;
     }
 
     @Override
@@ -47,85 +47,41 @@ public class ScrGhosts implements Screen, InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         nRanGhostMove = (int) (Math.random() * 50 + 1);
         if (nRanGhostMove == 1) {
-            bGhostChangeDir = true;
+            sprGhost.Movement(sprGhost, nGhostDirOld, nGhostDirNew);
         }
-        if (bGhostChangeDir == true) {
-            nGhostDirOld = nGhostDirNew;
-            nGhostDirNew = GhostDirection(nGhostDirNew, nGhostDirOld);
-            bGhostChangeDir = false;
+        sprGhost.setX(sprGhost.getX() + sprGhost.nDx);
+        sprGhost.setY(sprGhost.getY() + sprGhost.nDy);
+        if (bMovement = true) {
+            sprHamster.Movement(sprHamster, nHamDir);
         }
-        nGhostdX = horizontal(nGhostDirNew, nGhostdX);
-        nGhostdY = vertical(nGhostDirNew, nGhostdY);
-        nHamVorH = nHamDir % 2;
-        if (nHamVorH == 0) {
-            nHamdX = horizontal(nHamDir, nHamdY);
-            nHamdY = 0;
-        } else {
-            nHamdY = vertical(nHamDir, nHamdX);
-            nHamdX = 0;
+        bGhostOOB = isOutOfBounds(sprGhost);
+        if (bGhostOOB == true) {
+            sprGhost.OOB(sprGhost);
+            sprGhost.Movement(sprGhost, nGhostDirOld, nGhostDirNew);
+            sprGhost.setX(sprGhost.getX() + sprGhost.nDx);
+            sprGhost.setY(sprGhost.getY() + sprGhost.nDy);
         }
-        sprGhost.setX(sprGhost.getX() + nGhostdX);
-        sprGhost.setY(sprGhost.getY() + nGhostdY);
-        sprHamster.setX(sprHamster.getX() + nHamdX);
-        sprHamster.setY(sprHamster.getY() + nHamdY);
+        bHamsterOOB = isOutOfBounds(sprHamster);
+        if (bHamsterOOB == true) {
+            sprHamster.OOB(sprHamster);
+        }
         bIsHit = isHit(sprGhost, sprHamster);
         if (bIsHit == true) {
-            game.updateState(3);
+            gamHamsters.updateState(3);
         }
-        bGhostOutOfBounds = isOutOfBounds(sprGhost);
-        if (bGhostOutOfBounds == true) {
-            sprGhost.setX(sprGhost.getX() - nGhostdX);
-            sprGhost.setY(sprGhost.getY() - nGhostdY);
-            bGhostChangeDir = true;
-        }
-        bHamsterOutOfBounds = isOutOfBounds(sprHamster);
-        if (bHamsterOutOfBounds == true) {
-            sprHamster.setX(sprHamster.getX() - nHamdX);
-            sprHamster.setY(sprHamster.getY() - nHamdY);
-        }
-        
         batch.begin();
-        //batch.draw(Ghost, Ghost.getX(), Ghost.getY());
-        sprGhost.draw(batch);       
+        sprGhost.draw(batch);
         sprHamster.draw(batch);
         sprPellet.draw(batch);
         batch.end();
     }
 
-    public static int GhostDirection(int nNum1, int nNum2) {
-        while (nNum1 == nNum2) {
-            nNum1 = (int) (Math.random() * 4 + 1);
-        }
-        return nNum1;
+    public boolean isHit(Sprite sprGhost, Sprite spr2) {
+        return sprGhost.getBoundingRectangle().overlaps(spr2.getBoundingRectangle());
     }
 
-    public static int vertical(int nNum1, int nNum2) {
-        if (nNum1 == 1) {
-            nNum2 = 2;
-        } else if (nNum1 == 3) {
-            nNum2 = -2;
-        } else {
-            nNum2 = 0;
-        }
-        return nNum2;
-    }
-
-    public static int horizontal(int nNum1, int nNum2) {
-        if (nNum1 == 2) {
-            nNum2 = 2;
-        } else if (nNum1 == 4) {
-            nNum2 = -2;
-        } else {
-            nNum2 = 0;
-        }
-        return nNum2;
-    }
-
-    public boolean isHit(Sprite spr1, Sprite spr2) {
-        return spr1.getBoundingRectangle().overlaps(spr2.getBoundingRectangle());
-    }
-    public static boolean isOutOfBounds(Sprite spr1) {
-        if (0 < spr1.getX() && spr1.getX() + spr1.getWidth() < Gdx.graphics.getWidth() && 0 < spr1.getY() && spr1.getY() + spr1.getHeight() < Gdx.graphics.getHeight()) {
+    public static boolean isOutOfBounds(Sprite sprGhost) {
+        if (0 < sprGhost.getX() && sprGhost.getX() + sprGhost.getWidth() < Gdx.graphics.getWidth() && 0 < sprGhost.getY() && sprGhost.getY() + sprGhost.getHeight() < Gdx.graphics.getHeight()) {
             return false;
         } else {
             return true;
@@ -154,6 +110,7 @@ public class ScrGhosts implements Screen, InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+        bMovement = true;
         if (keycode == Input.Keys.W) {
             nHamDir = 1;
         } else if (keycode == Input.Keys.D) {
