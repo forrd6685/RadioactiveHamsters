@@ -1,44 +1,36 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gdx.scratches;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.GL20;
 import com.gdx.hamsters.GamHamsters;
 
-/**
- *
- * @author vachb8648
- */
-public class ScrWalls implements Screen, InputProcessor {
+public class ScrMenu implements Screen, InputProcessor {
 
-    SpriteBatch batch;
-    int nHamDir, nHamVorH, nHamdX, nHamdY;
-    boolean bHamsterOutOfBounds;
-    OrthographicCamera ocCam;
-    SprHamster sprHamster;
-    GamHamsters game;
+    String sMenu;
+    GamHamsters gamHamster;
+    int nScreen;
 
-    public ScrWalls(GamHamsters aThis) {
-        batch = new SpriteBatch();
-        sprHamster = new SprHamster(100, 100, 30, 30);
-        Gdx.input.setInputProcessor(this);
-        ocCam = new OrthographicCamera();
-        game = aThis;
+    public ScrMenu(GamHamsters _gamHamster) {
+        gamHamster = _gamHamster;
+
     }
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(this);
+        System.out.println("Welcome to the Menu!");
+        System.out.println("Press 1 to see our Screen Switching Scratch.");
+        System.out.println("Press 2 to play our 'game'.");
     }
 
     @Override
     public void render(float f) {
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
     }
 
     @Override
@@ -63,14 +55,11 @@ public class ScrWalls implements Screen, InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.W) {
-            nHamDir = 1;
-        } else if (keycode == Input.Keys.D) {
-            nHamDir = 2;
-        } else if (keycode == Input.Keys.S) {
-            nHamDir = 3;
-        } else if (keycode == Input.Keys.A) {
-            nHamDir = 4;
+        if (keycode == Input.Keys.NUM_1) {
+            gamHamster.updateState(0);
+        } else if (keycode == Input.Keys.NUM_2) {
+            gamHamster.updateState(2);
+//        } else if ()
         }
         return false;
     }

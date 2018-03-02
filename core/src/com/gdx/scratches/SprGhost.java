@@ -15,48 +15,35 @@ public class SprGhost extends Sprite {
 //        setFlip(true, true);
     }
 
-    public void Movement(Sprite spr1, int nDirOld, int nDirNew) {
+    public void Movement(int nDirNew) {
         nDx = 0;
         nDy = 0;
-        nDirOld = nDirNew;
-        nDirNew = GhostDirection(nDirNew, nDirOld);
-        nDx = horizontal(nDirNew, nDx);
-        nDy = vertical(nDirNew, nDy);
-//        spr1.setX(spr1.getX() + nDx);
-//        spr1.setY(spr1.getY() + nDy);
-    }
-
-    public void OOB(Sprite spr1) {
-        spr1.setX(spr1.getX() - nDx);
-        spr1.setY(spr1.getY() - nDy);
-    }
-
-    public static int GhostDirection(int nNum1, int nNum2) {
-        while (nNum1 == nNum2) {
-            nNum1 = (int) (Math.random() * 4 + 1);
+        if (nDirNew == 1) {
+            nDy = 2;
+            nDx = 0;
+        } else if (nDirNew == 2) {
+            nDx = 2;
+            nDy = 0;
+        } else if (nDirNew == 3) {
+            nDy = -2;
+            nDx = 0;
+        } else if (nDirNew == 4) {
+            nDx = -2;
+            nDy = 0;
         }
-        return nNum1;
+        setX(getX() + nDx);
+        setY(getY() + nDy);
     }
 
-    public static int vertical(int nNum1, int nNum2) {
-        if (nNum1 == 1) {
-            nNum2 = 2;
-        } else if (nNum1 == 3) {
-            nNum2 = -2;
-        } else {
-            nNum2 = 0;
-        }
-        return nNum2;
+    public void OOB() {
+        setX(getX() + nDx);
+        setY(getY() + nDy);
     }
 
-    public static int horizontal(int nNum1, int nNum2) {
-        if (nNum1 == 2) {
-            nNum2 = 2;
-        } else if (nNum1 == 4) {
-            nNum2 = -2;
-        } else {
-            nNum2 = 0;
+    public int GhostDirection(int nDirNew, int nDirOld) {
+        while (nDirNew == nDirOld) {
+            nDirNew = (int) (Math.random() * 4 + 1);
         }
-        return nNum2;
+        return nDirNew;
     }
 }

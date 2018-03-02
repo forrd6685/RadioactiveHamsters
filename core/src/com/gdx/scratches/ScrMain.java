@@ -27,7 +27,7 @@ public class ScrMain implements Screen, InputProcessor {
         nGhostdX = 0;
         nGhostdY = 0;
         bMovement = false;
-        Gdx.input.setInputProcessor(this);
+        bIsHit = false;
         ocCam = new OrthographicCamera();
         gamHamsters = _gamhamsters;
     }
@@ -37,6 +37,7 @@ public class ScrMain implements Screen, InputProcessor {
         ocCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         ocCam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         ocCam.update();
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
@@ -45,23 +46,21 @@ public class ScrMain implements Screen, InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         nRanGhostMove = (int) (Math.random() * 50 + 1);
         if (nRanGhostMove == 1) {
-            sprGhost.Movement(sprGhost, nGhostDirOld, nGhostDirNew);
+            nGhostDirOld = nGhostDirNew;
+            sprGhost.GhostDirection(nGhostDirOld, nGhostDirNew);
         }
-        sprGhost.setX(sprGhost.getX() + sprGhost.nDx);
-        sprGhost.setY(sprGhost.getY() + sprGhost.nDy);
+        sprGhost.Movement(nGhostDirNew);
         if (bMovement = true) {
-            sprHamster.Movement(sprHamster, nHamDir);
+            sprHamster.Movement(nHamDir);
         }
         bGhostOOB = isOutOfBounds(sprGhost);
         if (bGhostOOB == true) {
-            sprGhost.OOB(sprGhost);
-            sprGhost.Movement(sprGhost, nGhostDirOld, nGhostDirNew);
-            sprGhost.setX(sprGhost.getX() + sprGhost.nDx);
-            sprGhost.setY(sprGhost.getY() + sprGhost.nDy);
+            sprGhost.OOB();
+            sprGhost.Movement(nGhostDirNew);
         }
         bHamsterOOB = isOutOfBounds(sprHamster);
         if (bHamsterOOB == true) {
-            sprHamster.OOB(sprHamster);
+            sprHamster.OOB();
         }
         bIsHit = isHit(sprGhost, sprHamster);
         if (bIsHit == true) {

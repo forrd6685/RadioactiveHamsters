@@ -31,12 +31,12 @@ public class ScrSwitch1 implements Screen, InputProcessor {
         tx = new Texture("One.png");
         spr = new Sprite(tx);
         bKey = false;
-        System.out.println("Class Created.");
         Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void show() {
+        System.out.println("Press 'A' to switch screens");
     }
 
     @Override
@@ -44,7 +44,6 @@ public class ScrSwitch1 implements Screen, InputProcessor {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            System.out.println("a");
             hamsters.updateState(1);
         }
         batch.begin();
